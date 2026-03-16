@@ -1,0 +1,79 @@
+{
+  "ultima_actualizacion": "2026-03-16",
+  "mes": "Marzo 2026",
+  "estaciones": [
+    {
+      "id": "ypf",
+      "nombre": "YPF",
+      "color": "#009B77",
+      "apps": [
+        { "nombre": "Carga nocturna (App YPF)", "detalle": "6% todos los días · 0:00–6:00 am · sin tope" },
+        { "nombre": "Autodespacho (App YPF)", "detalle": "3% todos los días · acumulable con nocturna" },
+        { "nombre": "ACA (socios)", "detalle": "5% todos los días · tope $14.500/mes" }
+      ],
+      "bancos": [
+        { "banco": "Banco Macro", "descuento": "20-30%", "dia": "Miércoles", "detalle": "20% Platinum / 30% Selecta · tope $25.000/mes", "nivel": "alto" },
+        { "banco": "Banco Provincia", "descuento": "25%", "dia": "Sáb y Dom", "detalle": "Billetera Cuenta DNI · tope $8.000/semana", "nivel": "alto" },
+        { "banco": "Banco Nación", "descuento": "20%", "dia": "Viernes", "detalle": "MODO BNA+ · tope $10.000/mes", "nivel": "medio" },
+        { "banco": "Banco Galicia", "descuento": "10-15%", "dia": "Lunes", "detalle": "15% Éminent / 10% cuenta sueldo · tope $15.000/mes", "nivel": "medio" },
+        { "banco": "Banco ICBC", "descuento": "15%", "dia": "Martes", "detalle": "Cuenta sueldo vía MODO · tope $15.000/mes", "nivel": "medio" },
+        { "banco": "Banco Hipotecario", "descuento": "15%", "dia": "Martes", "detalle": "Búho One · Visa Signature/Platinum vía App YPF · tope $8.000/mes", "nivel": "medio" },
+        { "banco": "Banco Comafi", "descuento": "10-20%", "dia": "Sábados", "detalle": "10% std ($5.000/sem) · 20% Premium/Platinum ($8.000) · 20% Único Black ($10.000/sem)", "nivel": "medio" },
+        { "banco": "Banco Ciudad", "descuento": "10-15%", "dia": "Domingos", "detalle": "10% general ($10.000) · 15% jubilados/plan sueldo ($15.000) · MODO o Buepp", "nivel": "medio" },
+        { "banco": "Banco Santander", "descuento": "10%", "dia": "Jueves", "detalle": "Visa Black o Platinum desde App YPF · tope $7.500/mes", "nivel": "bajo" }
+      ]
+    },
+    {
+      "id": "shell",
+      "nombre": "Shell",
+      "color": "#E8282B",
+      "apps": [
+        { "nombre": "Shell Box (V-Power)", "detalle": "10% los miércoles · tope $4.000/semana" },
+        { "nombre": "Tarjeta 365", "detalle": "10% V-Power / 5% súper · lunes a viernes · tope $4.000 y $2.000/sem" },
+        { "nombre": "Jumbo+ y Vea Ahorro", "detalle": "10% V-Power los jueves + 5% adicional con tarjeta Cencosud" }
+      ],
+      "bancos": [
+        { "banco": "Banco Nación", "descuento": "25%", "dia": "Viernes", "detalle": "VISA o Mastercard BNA vía MODO · tope $13.000", "nivel": "alto" },
+        { "banco": "Banco Comafi", "descuento": "20%", "dia": "Domingos", "detalle": "Clientes Único · tope $10.000/sem · hasta $50.000 en marzo", "nivel": "alto" },
+        { "banco": "Banco Galicia", "descuento": "10-15%", "dia": "Lunes", "detalle": "10% general / 15% Éminent · MODO", "nivel": "medio" },
+        { "banco": "Ripio", "descuento": "10%", "dia": "Miércoles", "detalle": "En combustibles V-Power", "nivel": "bajo" }
+      ]
+    },
+    {
+      "id": "axion",
+      "nombre": "Axion Energy",
+      "color": "#0057A8",
+      "apps": [
+        { "nombre": "App ON", "detalle": "10% lunes y viernes en Quantium · tope $6.500–$12.000/mes según nivel" }
+      ],
+      "bancos": [
+        { "banco": "Brubank", "descuento": "20-30%", "dia": "Todos los días", "detalle": "Plan Plus: 20% vie/sáb/dom ($4.000/sem) · Plan Ultra: 30% todos los días ($30.000/mes)", "nivel": "alto" },
+        { "banco": "Banco Galicia", "descuento": "20%", "dia": "Lunes", "detalle": "Pagando con MODO · tope $15.000/mes", "nivel": "medio" },
+        { "banco": "Banco Nación", "descuento": "20%", "dia": "Viernes", "detalle": "Tope $10.000", "nivel": "medio" },
+        { "banco": "Banco Patagonia", "descuento": "20%", "dia": "Jueves", "detalle": "Tope $7.500/mes", "nivel": "medio" },
+        { "banco": "Banco Comafi", "descuento": "10-20%", "dia": "Lunes", "detalle": "10% std ($5.000/sem) · 20% Premium/Platinum ($8.000/sem)", "nivel": "medio" },
+        { "banco": "Banco Ciudad", "descuento": "15%", "dia": "Domingos", "detalle": "Jubilados y plan sueldo · MODO o Buepp · tope $15.000/mes", "nivel": "medio" },
+        { "banco": "Banco Credicoop", "descuento": "15-20%", "dia": "Viernes", "detalle": "15% general / 20% cuenta sueldo", "nivel": "medio" }
+      ]
+    },
+    {
+      "id": "puma",
+      "nombre": "Puma Energy",
+      "color": "#5C2D8A",
+      "apps": [
+        { "nombre": "App Puma Pris", "detalle": "10% los miércoles · súper, premium e Ion Diesel · hasta 50 litros/día" },
+        { "nombre": "Puma Pris (puntos)", "detalle": "Canjes por vouchers de hasta $20.000 · cualquier día" }
+      ],
+      "bancos": [
+        { "banco": "Banco Galicia", "descuento": "10-15%", "dia": "Lunes", "detalle": "15% Éminent / 10% cuenta sueldo · MODO", "nivel": "medio" },
+        { "banco": "Banco Comafi", "descuento": "10-20%", "dia": "Viernes", "detalle": "10% std ($5.000/sem) · 20% Premium/Platinum ($8.000) · MODO", "nivel": "medio" },
+        { "banco": "Mercado Pago", "descuento": "10%", "dia": "Domingos", "detalle": "QR Mercado Pago en estaciones adheridas", "nivel": "bajo" }
+      ]
+    }
+  ],
+  "descuentos_generales": [
+    { "banco": "Mercado Pago", "descuento": "30%", "dia": "Lunes", "detalle": "Tarjeta de crédito física · tope $6.000/mes · todas las marcas", "nivel": "alto" },
+    { "banco": "Banco Credicoop", "descuento": "20%", "dia": "Viernes", "detalle": "Cuentas sueldo · MODO · tope $6.000/semana · todas las marcas", "nivel": "medio" },
+    { "banco": "Banco Supervielle", "descuento": "10%", "dia": "Todos los días", "detalle": "Visa débito y MODO · tope $10.000/mes · todas las marcas", "nivel": "bajo" }
+  ]
+}
