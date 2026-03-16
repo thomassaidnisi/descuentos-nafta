@@ -3,134 +3,242 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Descuentos en Nafta Argentina</title>
+<title>Descuentos en Nafta · Argentina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --bg: #f5f5f3;
-    --surface: #ffffff;
-    --border: #e2e2de;
-    --text: #1a1a18;
-    --muted: #6b6b67;
-    --radius: 12px;
-    --alto-bg: #eaf3de; --alto-color: #3b6d11;
-    --medio-bg: #e6f1fb; --medio-color: #185fa5;
-    --bajo-bg: #f1efe8; --bajo-color: #5f5e5a;
-  }
+:root {
+  --bg: #f7f6f3; --surface: #ffffff; --surface2: #f0efe9;
+  --border: #e4e2db; --text: #1a1a18; --muted: #7a7a76; --radius: 16px;
+  --alto-bg: #eaf3de; --alto-c: #2d6a11;
+  --medio-bg: #ddeeff; --medio-c: #0d4f8f;
+  --bajo-bg: #f0efe9; --bajo-c: #7a7a76;
+}
 
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+.dark {
+  --bg: #0f0f0f; --surface: #1a1a1a; --surface2: #242424;
+  --border: rgba(255,255,255,0.08); --text: #f0f0ee; --muted: #888884;
+  --alto-bg: rgba(0,155,119,0.15); --alto-c: #4ecca3;
+  --medio-bg: rgba(55,138,221,0.15); --medio-c: #7ab8f5;
+  --bajo-bg: rgba(255,255,255,0.07); --bajo-c: #888884;
+}
 
-  header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 1.25rem 1.5rem; position: sticky; top: 0; z-index: 10; }
-  .header-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-  h1 { font-size: 18px; font-weight: 600; }
-  #fecha-update { font-size: 12px; color: var(--muted); }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; transition: background 0.2s, color 0.2s; }
 
-  .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 1rem 1.5rem; position: sticky; top: 0; z-index: 10; }
+.header-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.logo-area { display: flex; align-items: center; gap: 10px; }
+.logo-box { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #009B77, #0057A8); display: flex; align-items: center; justify-content: center; font-size: 17px; }
+h1 { font-size: 17px; font-weight: 600; letter-spacing: -0.02em; }
+.header-right { display: flex; align-items: center; gap: 10px; }
+.update-chip { font-size: 11px; font-family: 'DM Mono', monospace; background: var(--surface2); color: var(--muted); padding: 4px 10px; border-radius: 20px; border: 1px solid var(--border); }
+.toggle-wrap { display: flex; align-items: center; gap: 6px; }
+.toggle-icon { font-size: 14px; cursor: pointer; }
+.dark-toggle { width: 38px; height: 22px; border-radius: 11px; background: var(--surface2); border: 1px solid var(--border); cursor: pointer; position: relative; transition: background 0.2s; flex-shrink: 0; }
+.dark-toggle::after { content: ''; position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: var(--muted); transition: transform 0.2s, background 0.2s; }
+.dark .dark-toggle::after { transform: translateX(16px); background: #f0f0ee; }
 
-  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.5rem; }
-  .filter-btn { font-size: 13px; font-weight: 500; padding: 6px 16px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); cursor: pointer; transition: all 0.15s; }
-  .filter-btn:hover { border-color: #aaa; color: var(--text); }
-  .filter-btn.active { background: var(--text); color: #fff; border-color: var(--text); }
+.container { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
 
-  .day-filter { margin-bottom: 2rem; }
-  .day-filter label { font-size: 12px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 8px; }
-  .days { display: flex; flex-wrap: wrap; gap: 6px; }
-  .day-btn { font-size: 12px; padding: 4px 12px; border-radius: 14px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); cursor: pointer; transition: all 0.15s; }
-  .day-btn:hover { border-color: #aaa; }
-  .day-btn.active { background: #f0f0ee; color: var(--text); border-color: #bbb; font-weight: 500; }
+.section-title { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
 
-  .station-block { margin-bottom: 2rem; }
-  .station-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
-  .station-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-  .station-name { font-size: 16px; font-weight: 600; }
+.hoy-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 10px; margin-bottom: 2.5rem; }
+.hoy-card { border-radius: var(--radius); padding: 14px 16px; border: 1px solid var(--border); position: relative; overflow: hidden; }
+.hoy-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.hoy-banco { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+.hoy-pct { font-size: 30px; font-weight: 600; letter-spacing: -0.03em; font-family: 'DM Mono', monospace; }
+.hoy-chip { font-size: 11px; margin-top: 6px; padding: 2px 8px; border-radius: 20px; display: inline-block; font-weight: 500; }
+.hoy-det { font-size: 11px; color: var(--muted); margin-top: 5px; line-height: 1.4; }
 
-  .section-label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin: 12px 0 8px; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 1rem; }
+.filter-btn { font-size: 13px; font-weight: 500; padding: 7px 16px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface2); color: var(--muted); cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
+.filter-btn:hover { color: var(--text); border-color: var(--text); }
 
-  .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.day-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.75rem; align-items: center; }
+.day-lbl { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-right: 4px; }
+.day-btn { font-size: 12px; padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
+.day-btn:hover { color: var(--text); }
+.day-btn.active { background: var(--surface); color: var(--text); border-color: var(--text); font-weight: 500; }
 
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; }
-  .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 6px; }
-  .card-nombre { font-size: 13px; font-weight: 600; line-height: 1.3; }
-  .pct { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 8px; white-space: nowrap; flex-shrink: 0; }
-  .pct.alto { background: var(--alto-bg); color: var(--alto-color); }
-  .pct.medio { background: var(--medio-bg); color: var(--medio-color); }
-  .pct.bajo { background: var(--bajo-bg); color: var(--bajo-color); }
-  .card-detalle { font-size: 12px; color: var(--muted); line-height: 1.5; }
-  .day-tag { display: inline-block; margin-top: 6px; font-size: 11px; padding: 2px 8px; border-radius: 8px; background: var(--bg); color: var(--muted); border: 1px solid var(--border); }
+.station-block { margin-bottom: 2.5rem; }
+.station-header { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.station-logo { width: 52px; height: 52px; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); background: var(--surface); flex-shrink: 0; }
+.station-logo img { width: 100%; height: 100%; object-fit: contain; padding: 5px; }
+.station-logo-fallback { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff; flex-shrink: 0; }
+.station-name { font-size: 18px; font-weight: 600; letter-spacing: -0.02em; }
+.station-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
 
-  .app-card { background: #fafaf8; border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; }
-  .app-nombre { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
-  .app-detalle { font-size: 12px; color: var(--muted); }
+.sub-label { font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin: 10px 0 8px; }
 
-  .general-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 2rem; }
-  .general-title { font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 10px; }
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; }
 
-  .empty-msg { color: var(--muted); font-size: 14px; padding: 1rem 0; }
+.bank-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px 12px 18px; position: relative; overflow: hidden; }
+.bank-accent { position: absolute; left: 0; top: 0; bottom: 0; width: 3px; }
+.bank-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 5px; }
+.bank-nombre { font-size: 13px; font-weight: 500; line-height: 1.3; }
+.pct-pill { font-size: 12px; font-weight: 600; padding: 2px 9px; border-radius: 20px; white-space: nowrap; font-family: 'DM Mono', monospace; flex-shrink: 0; }
+.pct-alto { background: var(--alto-bg); color: var(--alto-c); }
+.pct-medio { background: var(--medio-bg); color: var(--medio-c); }
+.pct-bajo { background: var(--bajo-bg); color: var(--bajo-c); }
+.bank-det { font-size: 11px; color: var(--muted); line-height: 1.5; }
+.day-tag { display: inline-block; margin-top: 6px; font-size: 10px; padding: 2px 8px; border-radius: 20px; background: var(--surface2); color: var(--muted); border: 1px solid var(--border); }
 
-  footer { text-align: center; padding: 2rem 1rem; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); margin-top: 1rem; }
+.app-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+.app-nombre { font-size: 12px; font-weight: 500; margin-bottom: 3px; }
+.app-det { font-size: 11px; color: var(--muted); line-height: 1.4; }
 
-  @media (max-width: 600px) {
-    .cards-grid { grid-template-columns: 1fr; }
-    .header-inner { flex-direction: column; align-items: flex-start; }
-  }
+.no-results { text-align: center; padding: 3rem 1rem; color: var(--muted); font-size: 14px; }
+
+footer { text-align: center; padding: 2rem 1rem; font-size: 11px; color: var(--muted); border-top: 1px solid var(--border); margin-top: 2rem; font-family: 'DM Mono', monospace; }
+
+@media (max-width: 600px) {
+  .cards-grid { grid-template-columns: 1fr; }
+  .hoy-grid { grid-template-columns: repeat(2, 1fr); }
+  .header-inner { flex-direction: column; align-items: flex-start; }
+}
 </style>
 </head>
 <body>
 
 <header>
   <div class="header-inner">
-    <div>
-      <h1>⛽ Descuentos en Nafta · Argentina</h1>
-      <span id="fecha-update">Cargando...</span>
+    <div class="logo-area">
+      <div class="logo-box">⛽</div>
+      <h1>Descuentos en nafta · Argentina</h1>
     </div>
-    <div id="header-mes" style="font-size:14px;font-weight:500;color:#6b6b67;"></div>
+    <div class="header-right">
+      <span class="update-chip" id="update-chip">cargando...</span>
+      <div class="toggle-wrap">
+        <span class="toggle-icon" id="toggle-icon">🌙</span>
+        <button class="dark-toggle" id="dark-toggle" title="Cambiar tema"></button>
+      </div>
+    </div>
   </div>
 </header>
 
 <div class="container">
+  <div class="section-title" id="hoy-titulo">Mejores descuentos hoy</div>
+  <div class="hoy-grid" id="hoy-grid"></div>
 
   <div class="filters" id="filtros-estacion">
-    <button class="filter-btn active" data-estacion="todas">Todas las estaciones</button>
+    <button class="filter-btn" data-estacion="todas" style="background:var(--text);color:var(--bg);border-color:var(--text);">Todas</button>
   </div>
 
-  <div class="day-filter">
-    <label>Filtrar por día</label>
-    <div class="days" id="filtros-dia">
-      <button class="day-btn active" data-dia="todos">Todos los días</button>
-      <button class="day-btn" data-dia="Lunes">Lunes</button>
-      <button class="day-btn" data-dia="Martes">Martes</button>
-      <button class="day-btn" data-dia="Miércoles">Miércoles</button>
-      <button class="day-btn" data-dia="Jueves">Jueves</button>
-      <button class="day-btn" data-dia="Viernes">Viernes</button>
-      <button class="day-btn" data-dia="Sábados">Sábado</button>
-      <button class="day-btn" data-dia="Domingos">Domingo</button>
-    </div>
+  <div class="day-row">
+    <span class="day-lbl">Día</span>
+    <button class="day-btn active" data-dia="todos">Todos</button>
+    <button class="day-btn" data-dia="Lunes">Lun</button>
+    <button class="day-btn" data-dia="Martes">Mar</button>
+    <button class="day-btn" data-dia="Miércoles">Mié</button>
+    <button class="day-btn" data-dia="Jueves">Jue</button>
+    <button class="day-btn" data-dia="Viernes">Vie</button>
+    <button class="day-btn" data-dia="Sábados">Sáb</button>
+    <button class="day-btn" data-dia="Domingos">Dom</button>
   </div>
 
   <div id="contenido"></div>
-
 </div>
 
-<footer>
-  Datos actualizados automáticamente · Solo orientativo, verificar con cada banco · <a href="https://github.com" style="color:inherit">Ver en GitHub</a>
-</footer>
+<footer>datos actualizados automáticamente · solo orientativo, verificar con cada banco</footer>
 
 <script>
-let data = null;
-let estacionActiva = 'todas';
-let diaActivo = 'todos';
+const DIAS = ['Domingos','Lunes','Martes','Miércoles','Jueves','Viernes','Sábados'];
+const HOY = DIAS[new Date().getDay()];
+const COLORES = { ypf:'#009B77', shell:'#DD1D21', axion:'#0057A8', puma:'#6B21A8' };
+const INICIALES = { ypf:'YPF', shell:'SHL', axion:'AXN', puma:'PMA' };
+
+let data = null, estacionActiva = 'todas', diaActivo = 'todos', isDark = false;
 
 async function cargarData() {
   const res = await fetch('data.json?v=' + Date.now());
   data = await res.json();
-  inicializar();
+  document.getElementById('update-chip').textContent = 'actualizado ' + data.ultima_actualizacion;
+  initFiltros();
+  renderHoy();
+  renderContenido();
 }
 
-function inicializar() {
-  document.getElementById('fecha-update').textContent = 'Última actualización: ' + data.ultima_actualizacion;
-  document.getElementById('header-mes').textContent = data.mes;
+function matchDia(dia, filtro) {
+  if (filtro === 'todos') return true;
+  if (!dia) return false;
+  const dl = dia.toLowerCase();
+  if (dl.includes('todos')) return true;
+  const m = { Lunes:'lunes', Martes:'martes', 'Miércoles':'mié', Jueves:'jueves', Viernes:'viernes', Sábados:'sáb', Domingos:'dom' };
+  return dl.includes((m[filtro] || filtro).toLowerCase());
+}
 
+function renderHoy() {
+  const grid = document.getElementById('hoy-grid');
+  document.getElementById('hoy-titulo').textContent = 'Mejores descuentos hoy — ' + HOY;
+  let cards = [];
+  data.estaciones.forEach(e => {
+    e.bancos.filter(b => matchDia(b.dia, HOY) && b.nivel === 'alto').forEach(b => {
+      cards.push({ ...b, estacion: e.nombre, color: e.color });
+    });
+  });
+  (data.descuentos_generales || []).filter(b => matchDia(b.dia, HOY) && b.nivel === 'alto').forEach(b => {
+    cards.push({ ...b, estacion: 'Todas las marcas', color: '#888' });
+  });
+  if (!cards.length) {
+    grid.innerHTML = '<p style="color:var(--muted);font-size:13px;padding:1rem 0;">Sin descuentos destacados para hoy.</p>';
+    return;
+  }
+  cards.sort((a, b) => parseInt(b.descuento) - parseInt(a.descuento));
+  grid.innerHTML = cards.slice(0, 6).map(c =>
+    '<div class="hoy-card" style="background:' + c.color + '12;border-color:' + c.color + '28;">' +
+    '<div class="hoy-accent" style="background:' + c.color + ';"></div>' +
+    '<div class="hoy-banco">' + c.banco + '</div>' +
+    '<div class="hoy-pct" style="color:' + c.color + '">' + c.descuento + '</div>' +
+    '<span class="hoy-chip" style="background:' + c.color + '18;color:' + c.color + ';">' + c.estacion + '</span>' +
+    '<div class="hoy-det">' + c.detalle + '</div>' +
+    '</div>'
+  ).join('');
+}
+
+function renderContenido() {
+  const div = document.getElementById('contenido');
+  const estaciones = estacionActiva === 'todas' ? data.estaciones : data.estaciones.filter(e => e.id === estacionActiva);
+  let html = '';
+  estaciones.forEach(e => {
+    const color = e.color || COLORES[e.id] || '#888';
+    const bancos = e.bancos.filter(b => matchDia(b.dia, diaActivo));
+    if (diaActivo !== 'todos' && !bancos.length) return;
+    const fb = INICIALES[e.id] || e.nombre.slice(0, 3);
+    html += '<div class="station-block">' +
+      '<div class="station-header">' +
+      '<div class="station-logo" style="border-color:' + color + '30;">' +
+      '<img src="logos/' + e.id + '.png" alt="' + e.nombre + '" ' +
+      'onerror="this.parentElement.outerHTML=\'<div class=station-logo-fallback style=background:' + color + '>' + fb + '</div>\'">' +
+      '</div>' +
+      '<div><div class="station-name">' + e.nombre + '</div>' +
+      '<div class="station-sub">' + bancos.length + ' descuento' + (bancos.length !== 1 ? 's' : '') + ' ' + (diaActivo === 'todos' ? 'disponibles' : 'para ' + diaActivo.toLowerCase()) + '</div></div>' +
+      '</div>';
+    if (diaActivo === 'todos' && e.apps && e.apps.length) {
+      html += '<div class="sub-label">Beneficios propios / apps</div>' +
+        '<div class="cards-grid" style="margin-bottom:10px;">' +
+        e.apps.map(a => '<div class="app-card"><div class="app-nombre">' + a.nombre + '</div><div class="app-det">' + a.detalle + '</div></div>').join('') +
+        '</div>';
+    }
+    if (bancos.length) {
+      html += '<div class="sub-label">Descuentos bancarios</div><div class="cards-grid">' +
+        bancos.map(b =>
+          '<div class="bank-card">' +
+          '<div class="bank-accent" style="background:' + color + '"></div>' +
+          '<div class="bank-top"><span class="bank-nombre">' + b.banco + '</span><span class="pct-pill pct-' + b.nivel + '">' + b.descuento + '</span></div>' +
+          '<div class="bank-det">' + b.detalle + '</div>' +
+          '<span class="day-tag">' + b.dia + '</span>' +
+          '</div>'
+        ).join('') + '</div>';
+    }
+    html += '</div>';
+  });
+  if (!html) html = '<div class="no-results">Sin descuentos para este filtro.</div>';
+  div.innerHTML = html;
+}
+
+function initFiltros() {
   const filtros = document.getElementById('filtros-estacion');
   data.estaciones.forEach(e => {
     const btn = document.createElement('button');
@@ -139,100 +247,38 @@ function inicializar() {
     btn.textContent = e.nombre;
     filtros.appendChild(btn);
   });
-
-  filtros.addEventListener('click', e => {
-    const btn = e.target.closest('.filter-btn');
+  filtros.addEventListener('click', ev => {
+    const btn = ev.target.closest('.filter-btn');
     if (!btn) return;
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+    document.querySelectorAll('.filter-btn').forEach(b => { b.style.background = ''; b.style.color = ''; b.style.borderColor = ''; });
+    const color = COLORES[btn.dataset.estacion];
+    if (color) { btn.style.background = color; btn.style.color = '#fff'; btn.style.borderColor = color; }
+    else { btn.style.cssText = 'background:var(--text);color:var(--bg);border-color:var(--text);'; }
     estacionActiva = btn.dataset.estacion;
-    renderizar();
+    renderContenido();
   });
-
-  document.getElementById('filtros-dia').addEventListener('click', e => {
-    const btn = e.target.closest('.day-btn');
-    if (!btn) return;
-    document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    diaActivo = btn.dataset.dia;
-    renderizar();
+  document.querySelectorAll('.day-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      diaActivo = btn.dataset.dia;
+      renderContenido();
+    });
   });
-
-  renderizar();
 }
 
-function matchDia(dia) {
-  if (diaActivo === 'todos') return true;
-  if (dia.toLowerCase().includes('todos')) return true;
-  const mapa = { 'Lunes': 'lunes', 'Martes': 'martes', 'Miércoles': 'miér', 'Jueves': 'jueves', 'Viernes': 'viernes', 'Sábados': 'sáb', 'Domingos': 'dom' };
-  const buscar = mapa[diaActivo] || diaActivo.toLowerCase();
-  return dia.toLowerCase().includes(buscar);
-}
+document.getElementById('dark-toggle').addEventListener('click', () => {
+  isDark = !isDark;
+  document.body.classList.toggle('dark', isDark);
+  document.getElementById('toggle-icon').textContent = isDark ? '☀️' : '🌙';
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+});
 
-function cardHTML(item, esApp) {
-  if (esApp) {
-    return `<div class="app-card">
-      <div class="app-nombre">${item.nombre}</div>
-      <div class="app-detalle">${item.detalle}</div>
-    </div>`;
-  }
-  if (!matchDia(item.dia)) return '';
-  return `<div class="card">
-    <div class="card-top">
-      <span class="card-nombre">${item.banco}</span>
-      <span class="pct ${item.nivel}">${item.descuento}</span>
-    </div>
-    <div class="card-detalle">${item.detalle}</div>
-    <span class="day-tag">${item.dia}</span>
-  </div>`;
-}
-
-function renderizar() {
-  const contenido = document.getElementById('contenido');
-  let html = '';
-
-  const estaciones = estacionActiva === 'todas'
-    ? data.estaciones
-    : data.estaciones.filter(e => e.id === estacionActiva);
-
-  estaciones.forEach(e => {
-    const bancoCards = e.bancos.map(b => cardHTML(b, false)).filter(Boolean).join('');
-
-    if (diaActivo !== 'todos' && !bancoCards) return;
-
-    html += `<div class="station-block">
-      <div class="station-header">
-        <div class="station-dot" style="background:${e.color}"></div>
-        <span class="station-name">${e.nombre}</span>
-      </div>`;
-
-    if (diaActivo === 'todos' && e.apps.length) {
-      html += `<div class="section-label">Beneficios propios / apps</div>
-      <div class="cards-grid" style="margin-bottom:12px;">
-        ${e.apps.map(a => cardHTML(a, true)).join('')}
-      </div>`;
-    }
-
-    if (bancoCards) {
-      html += `<div class="section-label">Descuentos bancarios</div>
-      <div class="cards-grid">${bancoCards}</div>`;
-    }
-
-    html += `</div>`;
-  });
-
-  if (estacionActiva === 'todas' && diaActivo === 'todos' && data.descuentos_generales?.length) {
-    html += `<div class="general-section">
-      <div class="general-title">Descuentos en todas las marcas</div>
-      <div class="cards-grid">
-        ${data.descuentos_generales.map(b => cardHTML(b, false)).filter(Boolean).join('')}
-      </div>
-    </div>`;
-  }
-
-  if (!html) html = `<p class="empty-msg">No hay descuentos para el filtro seleccionado.</p>`;
-
-  contenido.innerHTML = html;
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+  isDark = true;
+  document.body.classList.add('dark');
+  document.getElementById('toggle-icon').textContent = '☀️';
 }
 
 cargarData();
