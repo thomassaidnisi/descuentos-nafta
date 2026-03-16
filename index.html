@@ -209,7 +209,7 @@ function renderContenido() {
     html += '<div class="station-block">' +
       '<div class="station-header">' +
       '<div class="station-logo" style="border-color:' + color + '30;">' +
-      '<img src="logos/' + e.id + '.png" alt="' + e.nombre + '" ' +
+      '<img src="logos/' + e.id + '.jpg" onerror="this.src=\'logos/' + e.id + '.png\'" +
       'onerror="this.parentElement.outerHTML=\'<div class=station-logo-fallback style=background:' + color + '>' + fb + '</div>\'">' +
       '</div>' +
       '<div><div class="station-name">' + e.nombre + '</div>' +
