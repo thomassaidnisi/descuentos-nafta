@@ -29,6 +29,9 @@ Devolvé SOLO un JSON válido con esta estructura exacta (sin texto adicional, s
         {
           "banco": "Nombre del banco",
           "descuento": "XX%",
+          "pct": 20,
+          "tope": 10000,
+          "periodo": "mes|semana|null",
           "dia": "Día de la semana",
           "detalle": "descripción detallada con tope",
           "nivel": "alto|medio|bajo"
@@ -51,6 +54,9 @@ Reglas:
 - nivel "alto" = descuento >= 20%
 - nivel "medio" = descuento 10-19%
 - nivel "bajo" = descuento < 10%
+- pct debe ser un número entero (el mayor descuento si hay rangos, ej: 30 para "20-30%")
+- tope debe ser un número entero en pesos, o null si no tiene tope
+- periodo debe ser "mes", "semana", o null si no tiene tope
 - Incluí SIEMPRE las 4 estaciones: ypf, shell, axion, puma con sus colores (#009B77, #E8282B, #0057A8, #5C2D8A)
 - ultima_actualizacion debe ser hoy: """ + datetime.date.today().isoformat() + """
 - mes debe ser el mes actual en español: """ + datetime.date.today().strftime("%B %Y").capitalize() + """
