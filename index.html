@@ -209,8 +209,8 @@ function renderContenido() {
     html += '<div class="station-block">' +
       '<div class="station-header">' +
       '<div class="station-logo" style="border-color:' + color + '30;">' +
-      '<img src="logos/' + e.id + '.jpg" onerror="this.src=\'logos/' + e.id + '.png\'" +
-      'onerror="this.parentElement.outerHTML=\'<div class=station-logo-fallback style=background:' + color + '>' + fb + '</div>\'">' +
+      '<img src="logos/' + e.id + '.jpg" alt="' + e.nombre + '" ' +
+      'onerror="this.src=\'logos/' + e.id + '.png\';this.onerror=function(){this.parentElement.outerHTML=\'<div class=station-logo-fallback style=background:' + color + '>' + fb + '</div>\'}">' +
       '</div>' +
       '<div><div class="station-name">' + e.nombre + '</div>' +
       '<div class="station-sub">' + bancos.length + ' descuento' + (bancos.length !== 1 ? 's' : '') + ' ' + (diaActivo === 'todos' ? 'disponibles' : 'para ' + diaActivo.toLowerCase()) + '</div></div>' +
