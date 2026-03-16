@@ -84,6 +84,10 @@ h1 { font-size: 17px; font-weight: 600; letter-spacing: -0.02em; }
 .pct-bajo { background: var(--bajo-bg); color: var(--bajo-c); }
 .bank-det { font-size: 11px; color: var(--muted); line-height: 1.5; }
 .day-tag { display: inline-block; margin-top: 6px; font-size: 10px; padding: 2px 8px; border-radius: 20px; background: var(--surface2); color: var(--muted); border: 1px solid var(--border); }
+.fuel-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.fuel-tag { font-size: 10px; padding: 2px 7px; border-radius: 20px; border: 1px solid var(--border); color: var(--muted); background: var(--surface2); }
+.fuel-tag.premium { background: #faeeda; color: #854F0B; border-color: #f0c070; }
+.dark .fuel-tag.premium { background: rgba(186,117,23,0.15); color: #EF9F27; border-color: rgba(186,117,23,0.3); }
 
 .app-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
 .app-nombre { font-size: 12px; font-weight: 500; margin-bottom: 3px; }
@@ -258,6 +262,7 @@ function renderContenido() {
           '<div class="bank-top"><span class="bank-nombre">' + b.banco + '</span><span class="pct-pill pct-' + b.nivel + '">' + b.descuento + '</span></div>' +
           '<div class="bank-det">' + b.detalle + '</div>' +
           '<span class="day-tag">' + b.dia + '</span>' +
+          (b.combustibles && b.combustibles.length ? '<div class="fuel-tags">' + b.combustibles.map(c => '<span class="fuel-tag' + (c.toLowerCase().includes('infinia') || c.toLowerCase().includes('v-power') || c.toLowerCase().includes('quantium') || c.toLowerCase().includes('premium') ? ' premium' : '') + '">' + c + '</span>').join('') + '</div>' : '') +
           '</div>'
         ).join('') + '</div>';
     }
@@ -338,6 +343,11 @@ cargarData();
     </div>
 
     <div class="field">
+      <label>Tipo de combustible</label>
+      <select id="calc-combustible"><option value="">Primero elegí la estación</option></select>
+    </div>
+
+    <div class="field">
       <label>¿Cuánto vas a cargar? ($)</label>
       <input type="number" id="calc-monto" placeholder="Ej: 15000" min="0">
     </div>
@@ -364,21 +374,46 @@ function calcPopularEstaciones() {
 
 document.getElementById('calc-estacion').addEventListener('change', function() {
   const est = this.value;
-  const sel = document.getElementById('calc-banco');
+  const selBanco = document.getElementById('calc-banco');
+  const selComb = document.getElementById('calc-combustible');
   document.getElementById('calc-resultado').className = 'result-box';
-  if (!est || !data) { sel.innerHTML = '<option>Primero elegí la estación</option>'; return; }
+  if (!est || !data) {
+    selBanco.innerHTML = '<option>Primero elegí la estación</option>';
+    selComb.innerHTML = '<option>Primero elegí la estación</option>';
+    return;
+  }
   const estData = data.estaciones.find(e => e.id === est);
   if (!estData) return;
-  sel.innerHTML = '<option value="">Elegí un descuento</option>' +
-    estData.bancos.map((b, i) =>
-      '<option value="' + i + '">' + b.banco + ' · ' + b.descuento + ' · ' + b.dia + '</option>'
-    ).join('');
+  selComb.innerHTML = '<option value="">Todos los combustibles</option>' +
+    (estData.combustibles || []).map(c => '<option value="' + c + '">' + c + '</option>').join('');
+  actualizarBancos(estData, '');
 });
+
+document.getElementById('calc-combustible').addEventListener('change', function() {
+  const estId = document.getElementById('calc-estacion').value;
+  if (!estId || !data) return;
+  const estData = data.estaciones.find(e => e.id === estId);
+  actualizarBancos(estData, this.value);
+  document.getElementById('calc-resultado').className = 'result-box';
+});
+
+function actualizarBancos(estData, combustible) {
+  const sel = document.getElementById('calc-banco');
+  let bancos = estData.bancos;
+  if (combustible) {
+    bancos = bancos.filter(b => !b.combustibles || b.combustibles.includes(combustible));
+  }
+  sel.innerHTML = '<option value="">Elegí un descuento</option>' +
+    bancos.map((b, i) =>
+      '<option value="' + estData.bancos.indexOf(b) + '">' + b.banco + ' · ' + b.descuento + ' · ' + b.dia + '</option>'
+    ).join('');
+}
 
 document.getElementById('calc-btn').addEventListener('click', () => {
   const estId = document.getElementById('calc-estacion').value;
   const idx = document.getElementById('calc-banco').value;
   const monto = parseFloat(document.getElementById('calc-monto').value);
+  const combustible = document.getElementById('calc-combustible').value;
   const res = document.getElementById('calc-resultado');
   if (!estId || idx === '' || !monto || monto <= 0) {
     res.className = 'result-box show';
@@ -395,9 +430,10 @@ document.getElementById('calc-btn').addEventListener('click', () => {
   const pago = monto - descReal;
   const pctReal = Math.round((descReal / monto) * 100);
   const superaTope = tope && descBruto > tope;
+  const fuelLabel = combustible ? ' en ' + combustible : '';
   res.className = 'result-box show';
   res.innerHTML =
-    '<div class="result-row"><span class="result-label">Monto a cargar</span><span class="result-value">$' + monto.toLocaleString('es-AR') + '</span></div>' +
+    '<div class="result-row"><span class="result-label">Monto a cargar' + fuelLabel + '</span><span class="result-value">$' + monto.toLocaleString('es-AR') + '</span></div>' +
     '<div class="result-row"><span class="result-label">Descuento (' + (superaTope ? pctReal : pct) + '%)</span><span class="result-value ahorro">- $' + Math.round(descReal).toLocaleString('es-AR') + '</span></div>' +
     '<div class="result-row"><span class="result-label">Lo que pagás</span><span class="result-value pago">$' + Math.round(pago).toLocaleString('es-AR') + '</span></div>' +
     (superaTope ? '<div class="tope-warning">⚠️ Supera el tope de $' + tope.toLocaleString('es-AR') + '/' + periodo + '. Se aplica solo hasta el tope.</div>' : '') +
