@@ -22,6 +22,7 @@ Devolvé SOLO un JSON válido con esta estructura exacta (sin texto adicional, s
       "id": "ypf",
       "nombre": "YPF",
       "color": "#009B77",
+      "combustibles": ["Super", "Infinia", "Diesel", "Infinia Diesel"],
       "apps": [
         { "nombre": "Nombre del beneficio", "detalle": "descripción corta" }
       ],
@@ -34,7 +35,8 @@ Devolvé SOLO un JSON válido con esta estructura exacta (sin texto adicional, s
           "periodo": "mes|semana|null",
           "dia": "Día de la semana",
           "detalle": "descripción detallada con tope",
-          "nivel": "alto|medio|bajo"
+          "nivel": "alto|medio|bajo",
+          "combustibles": ["Super", "Infinia"]
         }
       ]
     }
@@ -43,9 +45,13 @@ Devolvé SOLO un JSON válido con esta estructura exacta (sin texto adicional, s
     {
       "banco": "Nombre",
       "descuento": "XX%",
+      "pct": 20,
+      "tope": 10000,
+      "periodo": "mes",
       "dia": "Día",
       "detalle": "descripción",
-      "nivel": "alto|medio|bajo"
+      "nivel": "alto|medio|bajo",
+      "combustibles": ["Todos"]
     }
   ]
 }
@@ -57,6 +63,8 @@ Reglas:
 - pct debe ser un número entero (el mayor descuento si hay rangos, ej: 30 para "20-30%")
 - tope debe ser un número entero en pesos, o null si no tiene tope
 - periodo debe ser "mes", "semana", o null si no tiene tope
+- combustibles de la estación: nombres oficiales de cada producto (ej YPF: "Super", "Infinia", "Diesel", "Infinia Diesel"; Shell: "Super", "V-Power", "Diesel", "V-Power Diesel"; Axion: "Super", "Quantium", "Diesel", "Quantium Diesel"; Puma: "Super", "Puma Premium", "Ion Diesel")
+- combustibles de cada banco: listá solo los combustibles a los que aplica el descuento. Si aplica a todos, poné todos los de la estación
 - Incluí SIEMPRE las 4 estaciones: ypf, shell, axion, puma con sus colores (#009B77, #E8282B, #0057A8, #5C2D8A)
 - ultima_actualizacion debe ser hoy: """ + datetime.date.today().isoformat() + """
 - mes debe ser el mes actual en español: """ + datetime.date.today().strftime("%B %Y").capitalize() + """
